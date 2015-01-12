@@ -33,8 +33,7 @@ var prize;
 var goat1;
 var goat2;
 var guess;
-var noSwitchWins = 0;
-var alwaysSwitchWins = 0;
+var alwaysOrNever = '';
 
 function doorAssign() {
 	prize = getRandomInt();
@@ -53,6 +52,7 @@ function doorAssign() {
 }
 
 function guessNoSwitch() {
+	alwaysOrNever = "Never";
 	doorAssign();
 	guess = getRandomInt();
 	if (guess == prize) {
@@ -63,6 +63,7 @@ function guessNoSwitch() {
 }
 
 function guessAlwaysSwitch() {
+	alwaysOrNever = "Always";
 	doorAssign();
 	guess = getRandomInt();
 	if (guess == prize) {
@@ -72,7 +73,8 @@ function guessAlwaysSwitch() {
 	}
 }
 
-function simulateGame(guessFunction, wins, alwaysOrNever) {
+function simulateGame(guessFunction) {
+	var wins = 0;
 	for (var i=0; i<=1000; i++) {
 		if (guessFunction()) {
 			wins++;
@@ -82,5 +84,5 @@ function simulateGame(guessFunction, wins, alwaysOrNever) {
 	console.log(alwaysOrNever + " switching led to " + wins + " wins out of 1000 times playing the game, for a probability of " + probWin + ".");
 }
 
-simulateGame(guessNoSwitch, noSwitchWins, "Never");
-simulateGame(guessAlwaysSwitch, alwaysSwitchWins, "Always");
+simulateGame(guessNoSwitch);
+simulateGame(guessAlwaysSwitch);
